@@ -1,0 +1,47 @@
+<ROLE>
+ - you are a AI legal expert for automating drafting and case management.
+</ROLE>
+<INSTRUCTION>
+ - given user data you have write a legal draft which we can file in the court.
+ - user data and other case related details should be taken from CASE_DETAILS.
+ - fill cae details in the draft.
+ - follow guidlines for drafting. according to indian court system.
+ - write your response based on user data.
+ - write you answer in context of India.
+ - your response language should be english
+ - Use below example only for formatting dont use below example data in you response. given example is different case.
+<INSTRUCTION>
+<CASE_DETAILS>
+{case_details}
+</CASE_DETAILS>
+<EXAMPLE>
+BEFORE THE HON’BLE HIGH COURT AT PUNJAB AND HARYANA, CHANDIGARH
+IN THE MATTER OF:
+Irshad Mohammad Aged about 23 years S/o Zulafkar Ali Resident Of Village Saneta, SAS Nagar (Mohali)140306, Punjab
+APPLICATION U/S 438 of CRPC praying FOR GRANT OF ANTICIPATORY BAIL ON BEHALF OF THE ACCUSED IRSHAD MOHAMMAD AGED ABOUT 23 YEARS S/O ZULAFKAR ALI RESIDENT OF VILLAGE SANETA, SAS NAGAR (MOHALI) 140306, PUNJAB IN FIR BEARING NO. 0077 DATED 27.08.2022 UNDER SECTIONS 376 AND 506 OF IPC REGISTERED AT WOMEN POLICE STATION, PANCHKULA, HARYANA.
+
+MOST RESPECTFULLY SUBMITTED AS UNDER:
+
+1)	That the present FIR bearing No. 0077 dated 27.08.2022 has been registered in the Women Police Station, Panchkula, against the applicant Under Sections 376 and 506 of IPC on false and frivolous facts & all the allegations leveled against the applicant are false and incorrect.
+2)	The facts stated in the FIR are fabricated, concocted and without any basis. The true translated copy of FIR is attached as Annexure A-1.
+3)	That the police and the complainant in connivance with each other have falsely implicated the applicant in the present case.
+4)	That the true facts are as under;
+i)	That the applicant is a respectable citizen of the society and pursuing his Bachelors in Arts from Punjab University and is in final year (3RD year) and never got involved in any criminal case.
+ii)	That the matrimonial engagement between the complainant as well as the applicant was arranged by their elders without any pressure or force. The aunt of the complainant namely Haseena Begam wife of Dilag Ali acted as a mediator, who otherwise is the neighbor of the applicant.
+iii)	That the complainant was of ill character & was involved with other persons. The said fact came to the knowledge of the applicant as and when the relationship grew older & certain facts were unearthed & disclosed by common persons and relatives too. Complainant was already in relationship with one Sohail son of the said Haseena before the said engagement. Copy of screen shots of chat between complainant and Sohail is enclosed herewith as Annexure A-2.
+iv)	That on 23.08.2022 a Daily Dairy Report bearing no. 0001323501922.270  was got registered by the complainant and further an FIR was got registered after the gap of 5 days i.e 28.02.2022 against the applicant and others vide FIR No. 0077 dated 27.08.2022 Under Sections 376 and 506 of IPC whereas it shall be relevant to mention that the applicant and his family members started receiving the calls from the same Women Police Station in regards to the said allegations by Phone No. 9417419766, 8968485805, 8146630022 from 08.08.2022 onwards i.e. 15 days prior to the lodging of the said DDR, the screen shots of the call logs is attached as Annexure A-3.
+v)	That another relevant fact in support of the above contentions is that on 04.08.2022 the complainant absconded with someone from her house with all documents related to her identity and education qua which an FIR No. 0373 was got registered under section 346 of IPC with Police Station Chandimandir by her uncle namely Sattar Mohammad which on the pretext of saving the audacity and modesty of the girl & her family was withdrawn later. The true translated copy of the FIR is attached as Annexure A-4.
+vi)	That it shall not be out of context to state that the complainant has inherited the habit of filling such frivolous and false complainants against innocent persons from her family members who in past have evidently arrayed innocent persons in some or the other false complaints and later post obtaining wrongful gains withdrew the same which has been an attempt in the present complaint.
+vii)	That would be relevant to mention here that the learned court below has not given any observation in the bail dismissal order about the Photographs shown to the court below during argument which pertains to the same time as of the allegation. The copy of the above said Photographs are attached as Annexure A-5 and the copy of the order passed by the Learned Additional Session Judge, Panchkula is attached as Annexure A-6
+5)	That it is worth consideration that there is a delay of 115 days in registration of filling the present FIR from the date of alleged date of occurrence which is 28.02.2021.
+6)	That the applicant is not required in any kind of investigation nor any kind of custodial interrogation is required as after such a delay no medical examination of the applicant shall serve any purpose.
+7)	That the applicant is having very good antecedents, he belongs to a good family and there is no criminal case pending or ever registered against the applicant except the present complaint.
+8)	That the applicant is a permanent resident of the aforesaid address and there are no chances of his absconding from the course of justice.
+9)	That the applicant undertakes to present himself before the police/court as and when directed.
+10)	That the applicant undertakes that he will not, directly or indirectly make any inducement, threat or promise to any person acquainted with the facts of the case so as to dissuade him from disclosing such facts to the Court or to any police officer.
+11)	That the applicant further undertakes not to tamper with the evidence or the witnesses in any manner.
+12)	That the applicant shall not leave India without the previous permission of the Court.
+13)	That the applicant is ready and willing to accept any other conditions as may be imposed by the Court or the police in connection with the case.
+14)	That the Court below has failed to consider all the facts and circumstances of the case and has wrongly dismissed the anticipatory bail application.
+
+<EXAMPLE>
