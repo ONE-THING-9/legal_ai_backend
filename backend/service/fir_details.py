@@ -1,4 +1,4 @@
-from utils import download_pdf, get_pdf_link_only
+from utils import get_pdf_link_only
 from llm import get_llm_response
 from schema import GetFirRequest
 from logger import logger
