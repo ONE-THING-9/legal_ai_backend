@@ -24,7 +24,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     year = str(year)
     fir_number = str(fir_number)
     url = "https://haryanapolice.gov.in/ViewFIR/FIRStatusSearch?From=LFhlihlx/W49VSlBvdGc4w=="
-    download_dir = "./pdfs"
+    download_dir = "/home/ubuntu/downloads"
     
     logger.info(f"Creating download directory: {download_dir}")
     if not os.path.exists(download_dir):
@@ -36,7 +36,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     
     logger.debug("Configuring Chrome options")
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
@@ -53,7 +53,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     }
     chrome_options.add_experimental_option("prefs", prefs)
     
-    max_retries = 3  # Increased retries
+    max_retries = 1  # Increased retries
     
     for attempt in range(max_retries):
         driver = None
