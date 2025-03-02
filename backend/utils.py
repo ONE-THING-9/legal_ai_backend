@@ -2,7 +2,7 @@ import requests
 import os
 from urllib.parse import urlparse, unquote
 from logger import logger
-
+import tempfile
 import os
 import time
 import logging
@@ -22,25 +22,25 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     year = str(year)
     fir_number = str(fir_number)
     url = "https://haryanapolice.gov.in/ViewFIR/FIRStatusSearch?From=LFhlihlx/W49VSlBvdGc4w=="
-    expected_file_path = f"C:\\Users\\seema\\Downloads\\{fir_number}-{year}-{district}-{police_station}.pdf"
+    download_dir = "./pdfs"
+    if not os.path.exists(download_dir):
+        os.makedirs(download_dir)
+    expected_file_path = os.path.join(download_dir, f"{fir_number}-{year}-{district}-{police_station}.pdf")
     
-    # Set up Chrome options for headless mode and minimal logging
     chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_argument('--disable-logging')
-    chrome_options.add_argument('--log-level=3')
-    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    chrome_options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
     
-    # Add download preferences to ensure downloads complete
+    temp_user_data_dir = tempfile.mkdtemp()
+    chrome_options.add_argument(f"--user-data-dir={temp_user_data_dir}")
+    
     prefs = {
-        "download.default_directory": "C:\\Users\\seema\\Downloads",
+        "download.default_directory": download_dir,
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
-        "plugins.always_open_pdf_externally": True  # Force PDF to download instead of opening in browser
+        "plugins.always_open_pdf_externally": True
     }
     chrome_options.add_experimental_option("prefs", prefs)
     
