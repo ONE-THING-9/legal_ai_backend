@@ -2,8 +2,8 @@ from google import genai
 import httpx
 from google.genai import types
 from logger import logger
-
-gemini_api_key = "keys"
+import os
+gemini_api_key = os.environ.get('GEMINI_API_KEY')
 client = genai.Client(api_key=gemini_api_key)
 
 async def get_llm_response(prompt, pdf_url=None, grounding=None, model_name="gemini-2.0-flash", temp=.5, top_p=.5, max_tokens=512):
