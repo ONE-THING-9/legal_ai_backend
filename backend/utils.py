@@ -19,14 +19,22 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     Retrieves the PDF URL after performing a form search on the website.
     Returns the expected file path where the PDF should be saved.
     """
+    logger.info(f"Starting PDF retrieval for FIR: year={year}, district={district}, police_station={police_station}, fir_number={fir_number}")
+    
     year = str(year)
     fir_number = str(fir_number)
     url = "https://haryanapolice.gov.in/ViewFIR/FIRStatusSearch?From=LFhlihlx/W49VSlBvdGc4w=="
     download_dir = "./pdfs"
+    
+    logger.info(f"Creating download directory: {download_dir}")
     if not os.path.exists(download_dir):
         os.makedirs(download_dir)
-    expected_file_path = os.path.join(download_dir, f"{fir_number}-{year}-{district}-{police_station}.pdf")
+        logger.debug("Download directory created successfully")
     
+    expected_file_path = os.path.join(download_dir, f"{fir_number}-{year}-{district}-{police_station}.pdf")
+    logger.info(f"Expected file path: {expected_file_path}")
+    
+    logger.debug("Configuring Chrome options")
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
@@ -34,6 +42,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     chrome_options.add_argument("--disable-dev-shm-usage")
     
     temp_user_data_dir = tempfile.mkdtemp()
+    logger.debug(f"Created temporary user data directory: {temp_user_data_dir}")
     chrome_options.add_argument(f"--user-data-dir={temp_user_data_dir}")
     
     prefs = {
@@ -49,34 +58,41 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     for attempt in range(max_retries):
         driver = None
         try:
-            logger.info(f"Attempt {attempt + 1} of {max_retries}")
+            logger.info(f"Starting attempt {attempt + 1}/{max_retries}")
             driver = webdriver.Chrome(options=chrome_options)
-            # Set page load timeout to prevent hanging
+            logger.debug("Chrome WebDriver initialized successfully")
+            
+            logger.debug(f"Setting page load timeout: 30 seconds")
             driver.set_page_load_timeout(30)
-            # Set script timeout
             driver.set_script_timeout(30)
             
+            logger.info(f"Navigating to URL: {url}")
             driver.get(url)
+            logger.debug("Page loaded successfully")
             
             # --- Step 1: Fill in the search form ---
-            # Wait for and select the FIR year with increased timeout
+            logger.debug(f"Selecting FIR year: {year}")
             year_select = WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_ddFIRYear"))
             )
             Select(year_select).select_by_value(year)
+            logger.debug("Year selected successfully")
             
-            # Wait for and select the district
+            logger.debug(f"Selecting district: {district}")
             district_select = WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.ID, "ContentPlaceHolder1_ddlDistrict"))
             )
             Select(district_select).select_by_visible_text(district)
+            logger.debug("District selected successfully")
             
-            # Wait for the Police Station dropdown to be populated with non-default options
+            logger.debug(f"Waiting for police station dropdown to populate")
             WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.XPATH, "//select[@id='ContentPlaceHolder1_ddlPoliceStation']/option[not(contains(text(),'Select'))]"))
             )
+            logger.debug(f"Selecting police station: {police_station}")
             police_station_select = driver.find_element(By.ID, "ContentPlaceHolder1_ddlPoliceStation")
             Select(police_station_select).select_by_visible_text(police_station)
+            logger.debug("Police station selected successfully")
             
             # Enter the FIR number
             fir_number_input = WebDriverWait(driver, 30).until(
@@ -96,7 +112,9 @@ def get_pdf_link_only(year, district, police_station, fir_number):
             )
             
             # Store the main window handle before clicking
+            logger.debug("Storing initial window handles")
             initial_handles = driver.window_handles
+            logger.debug(f"Initial window handles count: {len(initial_handles)}")
             view_fir_link.click()
             
             # Check if new window/tab opened - use WebDriverWait for dynamic wait
@@ -240,18 +258,20 @@ def get_pdf_link_only(year, district, police_station, fir_number):
             wait_interval = 0.5
             waited_time = 0
             
+            logger.info("Starting download monitoring")
             download_successful = WebDriverWait(driver, max_wait_time).until(
                 lambda d: os.path.exists(expected_file_path) and os.path.getsize(expected_file_path) > 0
             )
+            logger.debug(f"Download successful: {download_successful}")
             
             if download_successful:
-                # Try to open the file to verify it's complete
+                logger.info("Verifying downloaded file integrity")
                 try:
                     with open(expected_file_path, 'rb') as file:
                         # Check if file has actual content
                         content = file.read(1024)
                         if content:  # If we have some content, file is likely downloaded
-                            logger.info(f"File successfully downloaded to {expected_file_path}")
+                            logger.info(f"File verification successful: {expected_file_path}")
                             return expected_file_path
                 except PermissionError:
                     # If still being written, wait a bit more then return
@@ -260,7 +280,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
                     )
                     return expected_file_path
                 except Exception as e:
-                    logger.warning(f"Error checking file: {str(e)}")
+                    logger.error(f"File verification failed: {str(e)}")
             
             logger.warning(f"Download timeout after {max_wait_time} seconds")
             
@@ -269,8 +289,10 @@ def get_pdf_link_only(year, district, police_station, fir_number):
                 return expected_file_path
                 
         except Exception as e:
-            logger.error(f"Attempt {attempt + 1} failed: {str(e)}")
+            logger.error(f"Attempt {attempt + 1} failed with error: {str(e)}")
+            logger.error(f"Error type: {type(e).__name__}")
             if attempt < max_retries - 1:
+                logger.info(f"Waiting before retry {attempt + 2}")
                 # Use a WebDriverWait equivalent instead of sleep
                 # (In this case we just need to wait between retries, so we'll use a dummy condition)
                 try:
@@ -283,11 +305,13 @@ def get_pdf_link_only(year, district, police_station, fir_number):
                 # Return expected path even if download failed - allows caller to check if file exists
                 return expected_file_path
         finally:
-            try:
-                if driver:
-                    driver.quit()  # Ensure driver is properly closed
-                    logger.info("WebDriver closed successfully")
-            except Exception as e:
-                logger.warning(f"Error closing driver: {str(e)}")
+            if driver:
+                logger.debug("Cleaning up WebDriver")
+                try:
+                    driver.quit()
+                    logger.debug("WebDriver closed successfully")
+                except Exception as e:
+                    logger.warning(f"Error closing WebDriver: {str(e)}")
     
+    logger.warning(f"All {max_retries} attempts completed. Returning expected file path: {expected_file_path}")
     return expected_file_path  # Return expected path even if all attempts failed
