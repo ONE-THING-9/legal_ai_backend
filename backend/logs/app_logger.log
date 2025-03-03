@@ -1214,3 +1214,107 @@
 {"timestamp": "2025-02-24T10:39:46.733641", "level": "INFO", "message": "Processing chat draft request", "module": "draft", "function": "get_draft", "line": 25}
 {"timestamp": "2025-02-24T10:39:51.453606", "level": "INFO", "message": "Processing chat search request", "module": "search", "function": "get_chat_search", "line": 29}
 {"timestamp": "2025-02-24T10:39:51.461615", "level": "ERROR", "message": "Failed to generate chat search: error='search'", "module": "search", "function": "get_chat_search", "line": 62}
+{"timestamp": "2025-03-03T06:32:27.740602", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 141}
+{"timestamp": "2025-03-03T06:32:27.740602", "level": "INFO", "message": "Received user details request user_id=amit", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T06:32:27.770464", "level": "INFO", "message": "Fetched user details: [{'session_id': 'd5b90585-5746-44e0-97f4-97c04b854803', 'title': ''}]", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T06:32:27.771467", "level": "INFO", "message": "User details fetched user_id=amit", "module": "user_detail", "function": "get_user_details", "line": 11}
+{"timestamp": "2025-03-03T06:32:27.772468", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 143}
+{"timestamp": "2025-03-03T06:32:37.053422", "level": "INFO", "message": "Received session history request session_id=d5b90585-5746-44e0-97f4-97c04b854803", "module": "router", "function": "get_session_history_api", "line": 158}
+{"timestamp": "2025-03-03T06:32:37.054523", "level": "INFO", "message": "Received session history request session_id=d5b90585-5746-44e0-97f4-97c04b854803", "module": "user_detail", "function": "get_session_details", "line": 31}
+{"timestamp": "2025-03-03T06:32:37.058541", "level": "INFO", "message": "Successfully retrieved session history session_id=d5b90585-5746-44e0-97f4-97c04b854803", "module": "user_detail", "function": "get_session_details", "line": 34}
+{"timestamp": "2025-03-03T06:32:37.058541", "level": "INFO", "message": "Successfully retrieved session history session_id=d5b90585-5746-44e0-97f4-97c04b854803", "module": "router", "function": "get_session_history_api", "line": 163}
+{"timestamp": "2025-03-03T11:14:58.527864", "level": "INFO", "message": "Received login request for user user_id=amit", "module": "router", "function": "login", "line": 23}
+{"timestamp": "2025-03-03T11:14:58.568560", "level": "INFO", "message": "Login successfuluser_id=amit", "module": "router", "function": "login", "line": 26}
+{"timestamp": "2025-03-03T11:14:58.693291", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 141}
+{"timestamp": "2025-03-03T11:14:58.697300", "level": "INFO", "message": "Received user details request user_id=amit", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:14:58.820671", "level": "INFO", "message": "Fetched user details: [{'session_id': 'd5b90585-5746-44e0-97f4-97c04b854803', 'title': ''}]", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:14:58.821658", "level": "INFO", "message": "User details fetched user_id=amit", "module": "user_detail", "function": "get_user_details", "line": 11}
+{"timestamp": "2025-03-03T11:14:58.822654", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 143}
+{"timestamp": "2025-03-03T11:15:13.373955", "level": "INFO", "message": "Received logout request session_id=5b780fb2-0a6b-4198-b33d-8fdbb96e3a2a", "module": "router", "function": "logout", "line": 115}
+{"timestamp": "2025-03-03T11:15:13.410478", "level": "INFO", "message": "Logout successful session_id=5b780fb2-0a6b-4198-b33d-8fdbb96e3a2a", "module": "router", "function": "logout", "line": 119}
+{"timestamp": "2025-03-03T11:15:26.272100", "level": "INFO", "message": "Received signup request user_id=amit1", "module": "router", "function": "signup", "line": 47}
+{"timestamp": "2025-03-03T11:15:26.308399", "level": "INFO", "message": "Signup successful user_id=amit1", "module": "router", "function": "signup", "line": 50}
+{"timestamp": "2025-03-03T11:15:36.076776", "level": "INFO", "message": "Received login request for user user_id=amit1", "module": "router", "function": "login", "line": 23}
+{"timestamp": "2025-03-03T11:15:36.107018", "level": "INFO", "message": "Login successfuluser_id=amit1", "module": "router", "function": "login", "line": 26}
+{"timestamp": "2025-03-03T11:15:36.325211", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 141}
+{"timestamp": "2025-03-03T11:15:36.326211", "level": "INFO", "message": "Received user details request user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:15:36.335049", "level": "INFO", "message": "Fetched user details: []", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:15:36.336046", "level": "WARNING", "message": "User details not found user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 17}
+{"timestamp": "2025-03-03T11:15:36.337049", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 143}
+{"timestamp": "2025-03-03T11:15:54.927701", "level": "INFO", "message": "Received summary request", "module": "router", "function": "invoke_get_fir_details", "line": 72}
+{"timestamp": "2025-03-03T11:15:54.942145", "level": "INFO", "message": "Processing summary get_fir_request: police_station=AMBALA CITY, year=2016, district=AMBALA, fir_number=1", "module": "fir_details", "function": "get_fir_details", "line": 13}
+{"timestamp": "2025-03-03T11:17:29.348383", "level": "ERROR", "message": "Failed to generate summary: error=PDF file not found", "module": "fir_details", "function": "get_fir_details", "line": 83}
+{"timestamp": "2025-03-03T11:17:29.350385", "level": "ERROR", "message": "Failed to process summary request error=PDF file not found", "module": "router", "function": "invoke_get_fir_details", "line": 79}
+{"timestamp": "2025-03-03T11:17:29.406441", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 141}
+{"timestamp": "2025-03-03T11:17:29.407689", "level": "INFO", "message": "Received user details request user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:17:29.409713", "level": "INFO", "message": "Fetched user details: []", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:17:29.411151", "level": "WARNING", "message": "User details not found user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 17}
+{"timestamp": "2025-03-03T11:17:29.411151", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 143}
+{"timestamp": "2025-03-03T11:18:52.137206", "level": "INFO", "message": "Received summary request", "module": "router", "function": "invoke_get_fir_details", "line": 72}
+{"timestamp": "2025-03-03T11:18:52.142207", "level": "INFO", "message": "Processing summary get_fir_request: police_station=AMBALA CITY, year=2016, district=AMBALA, fir_number=1", "module": "fir_details", "function": "get_fir_details", "line": 13}
+{"timestamp": "2025-03-03T11:19:25.013126", "level": "INFO", "message": "Starting LLM response generation: model=gemini-2.0-flash, has_pdf=True, has_grounding=False", "module": "llm", "function": "get_llm_response", "line": 11}
+{"timestamp": "2025-03-03T11:19:32.684529", "level": "INFO", "message": "Successfully generated summary", "module": "fir_details", "function": "get_fir_details", "line": 59}
+{"timestamp": "2025-03-03T11:19:32.769522", "level": "INFO", "message": "Successfully processed summary request", "module": "router", "function": "invoke_get_fir_details", "line": 74}
+{"timestamp": "2025-03-03T11:19:32.797008", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 141}
+{"timestamp": "2025-03-03T11:19:32.798010", "level": "INFO", "message": "Received user details request user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:19:32.800008", "level": "INFO", "message": "Fetched user details: [{'session_id': '8b9ce4ec-2d77-4dbf-8df8-7d579deb1671', 'title': 'AMBALA CITY_1'}]", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:19:32.800008", "level": "INFO", "message": "User details fetched user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 11}
+{"timestamp": "2025-03-03T11:19:32.801008", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 143}
+{"timestamp": "2025-03-03T11:19:39.998673", "level": "INFO", "message": "Received summary request", "module": "router", "function": "invoke_get_fir_details", "line": 72}
+{"timestamp": "2025-03-03T11:19:39.998673", "level": "INFO", "message": "Processing summary get_fir_request: police_station=AMBALA CITY, year=2016, district=AMBALA, fir_number=1", "module": "fir_details", "function": "get_fir_details", "line": 13}
+{"timestamp": "2025-03-03T11:19:40.008090", "level": "INFO", "message": "Found existing session: 67c590447ee95547412dec5a", "module": "fir_details", "function": "get_fir_details", "line": 27}
+{"timestamp": "2025-03-03T11:19:40.009103", "level": "INFO", "message": "Successfully processed summary request", "module": "router", "function": "invoke_get_fir_details", "line": 74}
+{"timestamp": "2025-03-03T11:36:08.361096", "level": "INFO", "message": "Received summary request", "module": "router", "function": "invoke_get_fir_details", "line": 73}
+{"timestamp": "2025-03-03T11:36:08.362080", "level": "INFO", "message": "Processing summary get_fir_request: police_station=AMBALA CITY, year=2016, district=AMBALA, fir_number=1", "module": "fir_details", "function": "get_fir_details", "line": 13}
+{"timestamp": "2025-03-03T11:36:08.380050", "level": "INFO", "message": "Found existing session: 67c590447ee95547412dec5a", "module": "fir_details", "function": "get_fir_details", "line": 27}
+{"timestamp": "2025-03-03T11:36:08.380050", "level": "INFO", "message": "Successfully processed summary request", "module": "router", "function": "invoke_get_fir_details", "line": 75}
+{"timestamp": "2025-03-03T11:36:08.385094", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 158}
+{"timestamp": "2025-03-03T11:36:08.385094", "level": "INFO", "message": "Received user details request user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:36:08.388875", "level": "INFO", "message": "Fetched user details: [{'session_id': '8b9ce4ec-2d77-4dbf-8df8-7d579deb1671', 'title': 'AMBALA CITY_1'}]", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:36:08.391389", "level": "INFO", "message": "User details fetched user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 11}
+{"timestamp": "2025-03-03T11:36:08.391389", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 160}
+{"timestamp": "2025-03-03T11:36:08.416363", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 158}
+{"timestamp": "2025-03-03T11:36:08.417359", "level": "INFO", "message": "Received user details request user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:36:08.419364", "level": "INFO", "message": "Fetched user details: [{'session_id': '8b9ce4ec-2d77-4dbf-8df8-7d579deb1671', 'title': 'AMBALA CITY_1'}]", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:36:08.419364", "level": "INFO", "message": "User details fetched user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 11}
+{"timestamp": "2025-03-03T11:36:08.420359", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 160}
+{"timestamp": "2025-03-03T11:36:13.638069", "level": "INFO", "message": "Received download FIR PDF request", "module": "router", "function": "invoke_download_fir_pdf", "line": 89}
+{"timestamp": "2025-03-03T11:36:13.660732", "level": "INFO", "message": "Processing download FIR PDF request: session_id=67c590447ee95547412dec5a, user_id=amit1", "module": "download_fir_pdf", "function": "download_fir_pdf", "line": 10}
+{"timestamp": "2025-03-03T11:36:13.667737", "level": "ERROR", "message": "Session not found: session_id=67c590447ee95547412dec5a", "module": "download_fir_pdf", "function": "download_fir_pdf", "line": 20}
+{"timestamp": "2025-03-03T11:37:55.263112", "level": "INFO", "message": "Received summary request", "module": "router", "function": "invoke_get_fir_details", "line": 73}
+{"timestamp": "2025-03-03T11:37:55.264111", "level": "INFO", "message": "Processing summary get_fir_request: police_station=AMBALA CITY, year=2016, district=AMBALA, fir_number=1", "module": "fir_details", "function": "get_fir_details", "line": 13}
+{"timestamp": "2025-03-03T11:37:55.270113", "level": "INFO", "message": "Found existing session: 67c590447ee95547412dec5a", "module": "fir_details", "function": "get_fir_details", "line": 27}
+{"timestamp": "2025-03-03T11:37:55.275724", "level": "INFO", "message": "Successfully processed summary request", "module": "router", "function": "invoke_get_fir_details", "line": 75}
+{"timestamp": "2025-03-03T11:37:55.305043", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 158}
+{"timestamp": "2025-03-03T11:37:55.308043", "level": "INFO", "message": "Received user details request user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:37:55.311044", "level": "INFO", "message": "Fetched user details: [{'session_id': '8b9ce4ec-2d77-4dbf-8df8-7d579deb1671', 'title': 'AMBALA CITY_1'}]", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:37:55.312044", "level": "INFO", "message": "User details fetched user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 11}
+{"timestamp": "2025-03-03T11:37:55.312044", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 160}
+{"timestamp": "2025-03-03T11:37:56.396029", "level": "INFO", "message": "Received download FIR PDF request", "module": "router", "function": "invoke_download_fir_pdf", "line": 89}
+{"timestamp": "2025-03-03T11:37:56.398877", "level": "INFO", "message": "Processing download FIR PDF request: session_id=67c590447ee95547412dec5a, user_id=amit1", "module": "download_fir_pdf", "function": "download_fir_pdf", "line": 10}
+{"timestamp": "2025-03-03T11:37:56.404831", "level": "ERROR", "message": "Session not found: session_id=67c590447ee95547412dec5a", "module": "download_fir_pdf", "function": "download_fir_pdf", "line": 20}
+{"timestamp": "2025-03-03T11:41:56.776906", "level": "INFO", "message": "Received summary request", "module": "router", "function": "invoke_get_fir_details", "line": 73}
+{"timestamp": "2025-03-03T11:41:56.777908", "level": "INFO", "message": "Processing summary get_fir_request: police_station=AMBALA CITY, year=2016, district=AMBALA, fir_number=2", "module": "fir_details", "function": "get_fir_details", "line": 13}
+{"timestamp": "2025-03-03T11:42:21.533533", "level": "INFO", "message": "Starting LLM response generation: model=gemini-2.0-flash, has_pdf=True, has_grounding=False", "module": "llm", "function": "get_llm_response", "line": 11}
+{"timestamp": "2025-03-03T11:42:31.890630", "level": "INFO", "message": "Successfully generated summary", "module": "fir_details", "function": "get_fir_details", "line": 54}
+{"timestamp": "2025-03-03T11:42:31.897851", "level": "INFO", "message": "Successfully processed summary request", "module": "router", "function": "invoke_get_fir_details", "line": 75}
+{"timestamp": "2025-03-03T11:42:32.282689", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 158}
+{"timestamp": "2025-03-03T11:42:32.282689", "level": "INFO", "message": "Received user details request user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:42:32.286721", "level": "INFO", "message": "Fetched user details: [{'session_id': 'fdde08ce-9ebe-4622-80ed-409dc77b30db', 'title': 'AMBALA CITY_2'}, {'session_id': '8b9ce4ec-2d77-4dbf-8df8-7d579deb1671', 'title': 'AMBALA CITY_1'}]", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:42:32.287720", "level": "INFO", "message": "User details fetched user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 11}
+{"timestamp": "2025-03-03T11:42:32.287720", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 160}
+{"timestamp": "2025-03-03T11:46:30.510134", "level": "INFO", "message": "Received summary request", "module": "router", "function": "invoke_get_fir_details", "line": 73}
+{"timestamp": "2025-03-03T11:46:30.512262", "level": "INFO", "message": "Processing summary get_fir_request: police_station=AMBALA CITY, year=2016, district=AMBALA, fir_number=6", "module": "fir_details", "function": "get_fir_details", "line": 13}
+{"timestamp": "2025-03-03T11:47:30.712904", "level": "INFO", "message": "Starting LLM response generation: model=gemini-2.0-flash, has_pdf=True, has_grounding=False", "module": "llm", "function": "get_llm_response", "line": 11}
+{"timestamp": "2025-03-03T11:47:37.452304", "level": "INFO", "message": "Successfully generated summary", "module": "fir_details", "function": "get_fir_details", "line": 54}
+{"timestamp": "2025-03-03T11:47:37.455727", "level": "INFO", "message": "Successfully created session: session_id=53d6145a-1e23-4fc8-abaa-24dfc7e39313", "module": "fir_details", "function": "get_fir_details", "line": 58}
+{"timestamp": "2025-03-03T11:47:37.458979", "level": "INFO", "message": "Successfully processed summary request", "module": "router", "function": "invoke_get_fir_details", "line": 75}
+{"timestamp": "2025-03-03T11:47:37.503555", "level": "INFO", "message": "Received user details request", "module": "router", "function": "invoke_get_user_details", "line": 158}
+{"timestamp": "2025-03-03T11:47:37.504575", "level": "INFO", "message": "Received user details request user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 7}
+{"timestamp": "2025-03-03T11:47:37.516282", "level": "INFO", "message": "Fetched user details: [{'session_id': '53d6145a-1e23-4fc8-abaa-24dfc7e39313', 'title': 'AMBALA CITY_6'}, {'session_id': 'fdde08ce-9ebe-4622-80ed-409dc77b30db', 'title': 'AMBALA CITY_2'}, {'session_id': '8b9ce4ec-2d77-4dbf-8df8-7d579deb1671', 'title': 'AMBALA CITY_1'}]", "module": "user_detail", "function": "get_user_details", "line": 9}
+{"timestamp": "2025-03-03T11:47:37.516282", "level": "INFO", "message": "User details fetched user_id=amit1", "module": "user_detail", "function": "get_user_details", "line": 11}
+{"timestamp": "2025-03-03T11:47:37.517784", "level": "INFO", "message": "Successfully processed user details request", "module": "router", "function": "invoke_get_user_details", "line": 160}
+{"timestamp": "2025-03-03T11:49:21.089045", "level": "INFO", "message": "Received download FIR PDF request", "module": "router", "function": "invoke_download_fir_pdf", "line": 89}
+{"timestamp": "2025-03-03T11:49:21.092053", "level": "INFO", "message": "Processing download FIR PDF request: session_id=53d6145a-1e23-4fc8-abaa-24dfc7e39313, user_id=amit1", "module": "download_fir_pdf", "function": "download_fir_pdf", "line": 10}
+{"timestamp": "2025-03-03T11:49:21.107881", "level": "INFO", "message": "Successfully found PDF at path: C:\\Users\\seema\\Downloads\\6-2016-AMBALA-AMBALA CITY.pdf", "module": "download_fir_pdf", "function": "download_fir_pdf", "line": 35}
+{"timestamp": "2025-03-03T11:49:21.109878", "level": "INFO", "message": "Successfully processed download FIR PDF request", "module": "router", "function": "invoke_download_fir_pdf", "line": 91}

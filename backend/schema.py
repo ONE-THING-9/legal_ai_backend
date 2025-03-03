@@ -28,3 +28,7 @@ class UserDetailsRequest(BaseModel):
 class HistoryRequest(BaseModel):
     session_id: str
     user_id: str
+
+class DownloadPdf(BaseModel):
+    session_id: str
+    user_id: str

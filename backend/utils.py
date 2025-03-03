@@ -24,7 +24,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     year = str(year)
     fir_number = str(fir_number)
     url = "https://haryanapolice.gov.in/ViewFIR/FIRStatusSearch?From=LFhlihlx/W49VSlBvdGc4w=="
-    download_dir = "/home/ubuntu/downloads"
+    download_dir = "C:\\Users\\seema\\Downloads\\"
     
     logger.info(f"Creating download directory: {download_dir}")
     if not os.path.exists(download_dir):

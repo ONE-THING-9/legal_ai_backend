@@ -7,8 +7,9 @@ from service.search import get_chat_search
 from service.user_detail import get_user_details, get_session_details
 from service.session import delete_draft_field, delete_search_field
 from service.login import authenticate_user, create_user, validate_session, end_session
+from service.download_fir_pdf import download_fir_pdf
 router = APIRouter()
-from schema import DraftRequest, SearchRequest, GetFirRequest, UserDetailsRequest, HistoryRequest
+from schema import DraftRequest, SearchRequest, GetFirRequest, UserDetailsRequest, HistoryRequest, DownloadPdf
 from logger import logger
 
 # Add new schema classes for authentication
@@ -77,6 +78,22 @@ async def invoke_get_fir_details(request: Request, get_fir_request: GetFirReques
         raise he
     except Exception as e:
         logger.error(f"Failed to process summary request error={str(e)}")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+@router.post("/download-fir-pdf")
+async def invoke_download_fir_pdf(request: Request, download_request: DownloadPdf):
+    try:
+        logger.info("Received download FIR PDF request")
+        response = await download_fir_pdf(request, download_request)
+        logger.info("Successfully processed download FIR PDF request")
+        return response
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        logger.error(f"Failed to process download FIR PDF request error={str(e)}")
         return {
             "status": "error",
             "message": str(e)

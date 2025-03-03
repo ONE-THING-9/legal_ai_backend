@@ -1,7 +1,9 @@
+from fastapi.responses import FileResponse
 from utils import get_pdf_link_only
 from llm import get_llm_response
 from schema import GetFirRequest
 from logger import logger
+import os
 from service.session import create_session, save_into_session_db, get_existing_session
 
 
@@ -23,11 +25,15 @@ async def get_fir_details(request, get_fir_request:GetFirRequest):
 
         if existing_session:
             logger.info(f"Found existing session: {existing_session['_id']}")
+            pdf_path = existing_session["pdf_link"]
+            # Check if PDF file exists
+            if not os.path.exists(pdf_path):
+                raise Exception("PDF file not found")
+                
             return {
                 "status": "success",
                 "data": {
                     "summary": existing_session["summary"],
-                    "pdf_link": existing_session["pdf_link"],
                     "session_id": str(existing_session["_id"])
                 }
             }
@@ -36,6 +42,10 @@ async def get_fir_details(request, get_fir_request:GetFirRequest):
         pdf_path = get_pdf_link_only(get_fir_request.year, get_fir_request.district, 
                                    get_fir_request.police_station, get_fir_request.fir_number)
         
+        # Check if PDF file exists
+        if not os.path.exists(pdf_path):
+            raise Exception("PDF file not found")
+            
         with open('prompts/summary.txt', 'r') as file:
             summary_prompt = file.read().strip()
         
@@ -45,7 +55,7 @@ async def get_fir_details(request, get_fir_request:GetFirRequest):
         text = "TODO"
         session_id = await create_session(request, get_fir_request.user_id,
                                           get_fir_request.police_station, get_fir_request.fir_number)
-
+        logger.info(f"Successfully created session: session_id={session_id}")
         await save_into_session_db(request, {"text": text, "summary": response,
                                              "fir":get_fir_request.fir_number, "year": get_fir_request.year,
                                               "police_station": get_fir_request.police_station,
@@ -56,7 +66,6 @@ async def get_fir_details(request, get_fir_request:GetFirRequest):
             "status": "success",
             "data": {
                 "summary": response,
-                "pdf_link": pdf_path,
                 "session_id": session_id
             }
         }

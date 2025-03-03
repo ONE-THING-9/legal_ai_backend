@@ -1,3 +1,5 @@
+import os 
+os.environ['GEMINI_API_KEY'] = "AIzaSyBWqzsaywJ3pkzysv14BuV_7Bs-az5TBTA"
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
