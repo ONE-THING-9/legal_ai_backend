@@ -52,7 +52,6 @@ jobs:
             git pull origin main
 
             # (Re)install dependencies in case they have changed
-            python3 -m pip install --upgrade pip
             source /home/ubuntu/venv/bin/activate
             pip3 install -r backend/requirement.txt
 
