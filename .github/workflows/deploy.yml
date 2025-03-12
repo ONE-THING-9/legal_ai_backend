@@ -56,11 +56,7 @@ jobs:
             pip3 install -r backend/requirement.txt
 
             # Stop the currently running FastAPI server (if any)
-            if pgrep -f "python3 backend/main.py" > /dev/null; then
-              pkill -f "python3 backend/main.py" && echo "Stopped existing FastAPI server" || echo "Failed to stop existing server"
-            else
-              echo "No existing FastAPI server running"
-            fi
+            PID=$(lsof -t -i:8000) && kill -9 $PID || echo "No process running on port 8000"
 
             # Start the FastAPI app using python3 main.py in the background
             nohup python3 ./backend/main.py > server.log 2>&1 &
