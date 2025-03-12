@@ -52,7 +52,7 @@ jobs:
 
             # (Re)install dependencies in case they have changed
             python3 -m pip install --upgrade pip
-            pip3 install -r bacnkend/requirement.txt
+            pip3 install -r backend/requirement.txt
 
             # Stop the currently running FastAPI server (if any)
             pkill -f main.py || true
