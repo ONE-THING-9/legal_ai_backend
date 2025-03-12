@@ -43,6 +43,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          debug: true  # Add this line
           script: |
             # Navigate to your app directory on the EC2 instance
             cd /home/ubuntu/legal_ai_backend
