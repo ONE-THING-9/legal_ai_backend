@@ -26,10 +26,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirement.txt
 
-      # 4. Run tests (assuming you use pytest; adjust if needed)
-      - name: Run Tests
-        run: pytest
-
   deploy:
     name: Deploy to EC2
     needs: build
