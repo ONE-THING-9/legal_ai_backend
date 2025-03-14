@@ -1,5 +1,4 @@
 import os 
-os.environ['GEMINI_API_KEY'] = "AIzaSyBWqzsaywJ3pkzysv14BuV_7Bs-az5TBTA"
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -8,7 +7,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from router import router as summary_router
 
 # Create FastAPI app instance
-app = FastAPI()
+app = FastAPI(root_path="/legal")
 
 # Create middleware to attach session_db to request
 class SessionDBMiddleware(BaseHTTPMiddleware):

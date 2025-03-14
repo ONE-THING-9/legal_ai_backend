@@ -1,0 +1,72 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout your repository code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 2. Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # 3. Install dependencies
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirement.txt
+
+  deploy:
+    name: Deploy to EC2
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout code for deployment
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 2. Deploy to EC2 via SSH
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          debug: true  # Add this line
+          script: |
+            # Navigate to your app directory on the EC2 instance
+            cd /home/ubuntu/legal_ai_backend
+
+            # Pull the latest code from the GitHub repository
+            git pull origin main
+
+            # (Re)install dependencies in case they have changed
+            source /home/ubuntu/venv/bin/activate
+            pip3 install -r backend/requirement.txt
+
+            # Stop the currently running FastAPI server (if any)
+            PID=$(lsof -t -i:8000) && kill -9 $PID || echo "No process running on port 8000"
+
+            # Start the FastAPI app using python3 main.py in the background
+            nohup python3 ./backend/main.py > server.log 2>&1 &
+            sleep 2
+
+            # Check if the process is running
+            if pgrep -f "python3 backend/main.py" > /dev/null; then
+              echo "FastAPI server started successfully"
+              exit 0
+            else
+              echo "Failed to start FastAPI server"
+              exit 1
+            fi
