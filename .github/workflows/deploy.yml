@@ -55,6 +55,8 @@ jobs:
             source /home/ubuntu/venv/bin/activate
             pip3 install -r backend/requirement.txt
 
+            export GEMINI_API_KEY="${{ secrets.GEMINI_API_KEY }}"
+
             # Stop the currently running FastAPI server (if any)
             PID=$(lsof -t -i:8000) && kill -9 $PID || echo "No process running on port 8000"
 
