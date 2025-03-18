@@ -2,6 +2,8 @@ from llm import get_llm_response
 from schema import DraftRequest
 from service.session import get_session_history, save_conversation_into_db
 from logger import logger
+from config import PATHS
+import os
 
 
 async def process_history(request, user_id, session_id, only_conversation = False):
@@ -32,7 +34,10 @@ async def get_draft(request, draft_request: DraftRequest):
                 }
         summary, pdf_text, previous_draft = await process_history(request, draft_request.user_id, draft_request.session_id)
         logger.info(f"Summary: {summary}, PDF Text: {pdf_text}, Previous Draft: {previous_draft}")
-        with open('prompts/chat_draft_prompt.txt', 'r') as file:
+        
+        # Use config for prompt file path
+        prompt_path = os.path.join(PATHS["prompts"], 'chat_draft_prompt.txt')
+        with open(prompt_path, 'r') as file:
             chat_draft_prompt = file.read().strip()
             
         prompt = chat_draft_prompt.format(

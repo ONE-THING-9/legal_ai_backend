@@ -1,8 +1,9 @@
 from llm import get_llm_response
 from schema import SearchRequest
 from service.session import get_session_history, save_conversation_into_db
-
 from logger import logger
+from config import PATHS
+import os
 
 async def process_history(request, user_id, session_id, only_conversation=False):
     result = await get_session_history(request, user_id, session_id)
@@ -23,6 +24,7 @@ async def process_history(request, user_id, session_id, only_conversation=False)
     else:
         draft = None
     return summary, pdf_text, draft, previous_search
+
 async def get_chat_search(request, search_request: SearchRequest):
     try:
         print("hello")
@@ -35,9 +37,12 @@ async def get_chat_search(request, search_request: SearchRequest):
                     "message": previous_search
                 }
         
-        summary, pdf_text,draft,  previous_search = await process_history(request, search_request.user_id, search_request.session_id)
+        summary, pdf_text, draft, previous_search = await process_history(request, search_request.user_id, search_request.session_id)
         logger.info(f"Summary: {summary}, PDF Text: {pdf_text}, Previous Search: {previous_search}")
-        with open('prompts/chat_search_prompt.txt', 'r') as file:
+        
+        # Use config for prompt file path
+        prompt_path = os.path.join(PATHS["prompts"], 'chat_search_prompt.txt')
+        with open(prompt_path, 'r') as file:
             chat_draft_prompt = file.read().strip()
             
         prompt = chat_draft_prompt.format(

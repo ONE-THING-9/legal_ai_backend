@@ -5,6 +5,7 @@ from schema import GetFirRequest
 from logger import logger
 import os
 from service.session import create_session, save_into_session_db, get_existing_session
+from config import PATHS
 
 
 
@@ -41,12 +42,15 @@ async def get_fir_details(request, get_fir_request:GetFirRequest):
         # Continue with original flow if no existing session found
         pdf_path = get_pdf_link_only(get_fir_request.year, get_fir_request.district, 
                                    get_fir_request.police_station, get_fir_request.fir_number)
+        print("done")
         
         # Check if PDF file exists
         if not os.path.exists(pdf_path):
             raise Exception("PDF file not found")
-            
-        with open('prompts/summary.txt', 'r') as file:
+        
+        # Use config for prompt file path
+        prompt_path = os.path.join(PATHS["prompts"], 'summary.txt')
+        with open(prompt_path, 'r') as file:
             summary_prompt = file.read().strip()
         
         logger.debug(f"Generated summary prompt: pdf_path={pdf_path}")

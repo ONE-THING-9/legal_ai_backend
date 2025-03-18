@@ -11,6 +11,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException
+from config import PATHS
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +25,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     year = str(year)
     fir_number = str(fir_number)
     url = "https://haryanapolice.gov.in/ViewFIR/FIRStatusSearch?From=LFhlihlx/W49VSlBvdGc4w=="
-    download_dir = "C:\\Users\\seema\\Downloads\\"
+    download_dir = PATHS["downloads"]
     
     logger.info(f"Creating download directory: {download_dir}")
     if not os.path.exists(download_dir):

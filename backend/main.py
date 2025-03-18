@@ -1,11 +1,11 @@
 import os 
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 import uvicorn
 from motor.motor_asyncio import AsyncIOMotorClient
 from router import router as summary_router
-
 # Create FastAPI app instance
 app = FastAPI(root_path="/legal")
 

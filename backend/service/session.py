@@ -1,5 +1,7 @@
 import uuid
 import datetime
+import os
+from config import PATHS
 
 async def create_session(request, user_id: str, police_station: str, fir_number: str):
     db = request.state.session_db
@@ -40,11 +42,11 @@ async def save_conversation_into_db(request, user_id: str, session_id: str, user
     return result.modified_count > 0
 
 async def get_latest_sessions(request, user_id: str):
-        db = request.state.session_db
-        collection = db[user_id]
-        cursor = collection.find().sort("created_at", -1).limit(5)
-        sessions = await cursor.to_list(length=5)
-        return [{"session_id": session["session_id"], "title": session.get("title", "")} for session in sessions]
+    db = request.state.session_db
+    collection = db[user_id]
+    cursor = collection.find().sort("created_at", -1).limit(5)
+    sessions = await cursor.to_list(length=5)
+    return [{"session_id": session["session_id"], "title": session.get("title", "")} for session in sessions]
 
 async def get_existing_session(request, user_id: str, fir_number: str, police_station: str, district: str, year):
     """
@@ -84,7 +86,7 @@ async def delete_draft_field(request, user_id: str, session_id: str):
 
 async def delete_search_field(request, user_id: str, session_id: str):
     """
-    Delete the 'draft' field from the session if it exists.
+    Delete the 'search' field from the session if it exists.
     """
     db = request.state.session_db
     collection = db[user_id]
@@ -97,3 +99,20 @@ async def delete_search_field(request, user_id: str, session_id: str):
         )
         return result.modified_count > 0
     raise Exception("search not found")
+
+# New function to get file path using the configured base paths
+def get_file_path(file_type, filename):
+    """
+    Get the full path for a file using the configured base paths
+    
+    Args:
+        file_type: Type of file (downloads, uploads, temp, logs)
+        filename: Name of the file
+        
+    Returns:
+        Full path to the file
+    """
+    if file_type not in PATHS:
+        raise ValueError(f"Invalid file type: {file_type}")
+    
+    return os.path.join(PATHS[file_type], filename)
