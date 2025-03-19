@@ -2,10 +2,13 @@ import os
 from pathlib import Path
 
 # Base directory for the application
-BASE_DIR = ".\\backend\\"
+# BASE_DIR = ".\\backend\\"
+BASE_DIR = "./backend/"
+
 
 # Base paths for different resources
 PATHS = {
+    # "downloads": "C:\\Users\\seema\\Downloads",  
     "downloads": "/home/ubuntu/downloads",
     "uploads": os.environ.get("LEGAL_AI_UPLOADS_PATH", os.path.join(BASE_DIR, "uploads")),
     "temp": os.environ.get("LEGAL_AI_TEMP_PATH", os.path.join(BASE_DIR, "temp")),
