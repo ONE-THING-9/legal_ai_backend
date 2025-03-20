@@ -53,7 +53,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     # Set up Chrome options
     chrome_options = webdriver.ChromeOptions()
     # Uncomment the next line for production to run without a visible browser
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
@@ -127,6 +127,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
             )
             #store all tab/window opened by selenium
             initial_handles = driver.window_handles
+            main_window = initial_handles[0]
             view_fir_link.click()
             logger.debug("Clicked 'View FIR' link")
 
@@ -144,31 +145,49 @@ def get_pdf_link_only(year, district, police_station, fir_number):
             WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.TAG_NAME, "body"))
             )
+            WebDriverWait(driver, 60).until(
+                EC.invisibility_of_element_located((By.ID, "RptView_AsyncWait"))
+            )
+            logger.debug("Report has finished loading")
 
-            # Step 3: Find and click the Export button
-            # Note: Replace with actual locator after inspecting the website
+            # Find and click the Export button using a precise locator
             export_button = WebDriverWait(driver, 30).until(
-                    EC.element_to_be_clickable((By.XPATH, "//table[@title='Export']//a"))
-                )
-            # export_button = WebDriverWait(driver, 30).until(
-            #        EC.element_to_be_clickable((By.ID, "RptView_ctl06_ctl04_ctl00_ButtonLink"))
-            #   )
+                EC.element_to_be_clickable((By.ID, "RptView_ctl06_ctl04_ctl00_ButtonLink"))
+            )
             driver.execute_script("arguments[0].click();", export_button)
             logger.debug("Clicked export button")
 
-            # Step 4: Find and click the PDF option
-            # Note: Replace with actual locator after inspecting the website
+            # Find and click the PDF option using a specific locator
             pdf_option = WebDriverWait(driver, 30).until(
-                EC.element_to_be_clickable((By.XPATH, "//*[text()='PDF']"))
+                EC.element_to_be_clickable((By.XPATH, "//div[@id='RptView_ctl06_ctl04_ctl00_Menu']//a[text()='PDF']"))
             )
-            # pdf_option = WebDriverWait(driver, 10).until(
-            #         EC.element_to_be_clickable((By.XPATH, "//div[@id='RptView_ctl06_ctl04_ctl00_Menu']//a[text()='PDF']"))
-            #     )
             driver.execute_script("arguments[0].click();", pdf_option)
-            logger.debug("Clicked PDF option")
+
+            # Step 3: Find and click the Export button
+            # Note: Replace with actual locator after inspecting the website
+            # export_button = WebDriverWait(driver, 30).until(
+            #         EC.element_to_be_clickable((By.XPATH, "//table[@title='Export']//a"))
+            #     )
+            # # export_button = WebDriverWait(driver, 30).until(
+            # #        EC.element_to_be_clickable((By.ID, "RptView_ctl06_ctl04_ctl00_ButtonLink"))
+            # #   )
+            # driver.execute_script("arguments[0].click();", export_button)
+            # logger.debug("Clicked export button")
+
+            # # Step 4: Find and click the PDF option
+            # # Note: Replace with actual locator after inspecting the website
+            # pdf_option = WebDriverWait(driver, 30).until(
+            #     EC.element_to_be_clickable((By.XPATH, "//*[text()='PDF']"))
+            # )
+            # # pdf_option = WebDriverWait(driver, 10).until(
+            # #         EC.element_to_be_clickable((By.XPATH, "//div[@id='RptView_ctl06_ctl04_ctl00_Menu']//a[text()='PDF']"))
+            # #     )
+            # driver.execute_script("arguments[0].click();", pdf_option)
+            # logger.debug("Clicked PDF option")
 
 
             # Step 5: Verify the download
+            print("done pdf")
             max_wait_time = 120
             start_time = time.time()
             while time.time() - start_time < max_wait_time:
@@ -177,15 +196,24 @@ def get_pdf_link_only(year, district, police_station, fir_number):
                     return expected_file_path
                 time.sleep(1)
             time.sleep(3)
+            print("done sleep")
         except Exception as e:
             logger.error(f"Unexpected error in attempt {attempt + 1}: {str(e)}")
             if attempt == max_retries - 1:
                 raise
         
         finally:
+            print("done finally")
             if driver:
+                for handle in driver.window_handles:
+                        if handle != main_window:
+                            driver.switch_to.window(handle)
+                            driver.close()
+                # Switch back to the main window and quit
+                driver.switch_to.window(main_window)
                 driver.quit()
                 logger.debug("WebDriver closed")
+            print("done driver quit")
             if os.path.exists(temp_user_data_dir):
                 try:
                     shutil.rmtree(temp_user_data_dir)
