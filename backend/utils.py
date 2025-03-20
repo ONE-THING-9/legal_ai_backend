@@ -53,7 +53,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     # Set up Chrome options
     chrome_options = webdriver.ChromeOptions()
     # Uncomment the next line for production to run without a visible browser
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
