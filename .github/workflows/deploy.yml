@@ -46,7 +46,7 @@ jobs:
           debug: true  # Add this line
           script: |
             # Navigate to your app directory on the EC2 instance
-            cd /home/ubuntu/legal_ai_backend
+            cd /home/ubuntu/legal/legal_ai_backend
 
             # Pull the latest code from the GitHub repository
             git pull origin main
