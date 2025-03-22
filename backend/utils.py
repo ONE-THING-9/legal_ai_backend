@@ -53,7 +53,7 @@ def get_pdf_link_only(year, district, police_station, fir_number):
     # Set up Chrome options
     chrome_options = webdriver.ChromeOptions()
     # Uncomment the next line for production to run without a visible browser
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
@@ -148,12 +148,22 @@ def get_pdf_link_only(year, district, police_station, fir_number):
             WebDriverWait(driver, 60).until(
                 EC.invisibility_of_element_located((By.ID, "RptView_AsyncWait"))
             )
-            logger.debug("Report has finished loading")
-
-            # Find and click the Export button using a precise locator
             export_button = WebDriverWait(driver, 30).until(
                 EC.element_to_be_clickable((By.ID, "RptView_ctl06_ctl04_ctl00_ButtonLink"))
             )
+            while "ExportDisabled.gif" in export_button.get_attribute("outerHTML"):
+                print("dis")
+                if time.time() - start_time > max_wait_time:
+                    logger.warning("Export button did not enable after waiting.")
+                    break  # Exit the loop if time exceeds max_wait_time
+                logger.info("Export button is disabled, waiting...")
+                time.sleep(1)  # Wait for 1 second before checking again
+                export_button = driver.find_element(By.ID, "RptView_ctl06_ctl04_ctl00_ButtonLink")  # Refresh the element
+
+            logger.debug("Report has finished loading")
+
+            # Find and click the Export button using a precise locator
+            
             driver.execute_script("arguments[0].click();", export_button)
             logger.debug("Clicked export button")
 

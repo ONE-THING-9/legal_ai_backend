@@ -16,6 +16,9 @@ class DraftRequest(BaseModel):
     user_message: Union[str, None]
     session_id: str
     user_id: str
+    draft_type: str
+    court: str
+    high_court: Union[str, None]
 
 class SearchRequest(BaseModel):
     user_message: Union[str, None]
